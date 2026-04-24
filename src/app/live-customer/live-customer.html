@@ -1,0 +1,19 @@
+@if (customer(); as c) {
+  <div>
+    <p [class.flash]="isChanged('name')">
+      Name: {{ c.name }}
+    </p>
+
+    <p [class.flash]="isChanged('price')">
+      Price: {{ c.price }}
+    </p>
+
+    <p [class.flash]="isChanged('quantity')">
+      Quantity: {{ c.quantity }}
+    </p>
+
+    <p [class.flash]="isChanged('status')">
+      Status: {{ c.status }}
+    </p>
+  </div>
+}

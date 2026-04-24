@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (customer of customers(); track customer.id) {
+      <tr (click)="openCustomer(customer.id)">
+        <td>{{ customer.name }}</td>
+
+        <td [class.flash-changed]="isChanged(customer.id, 'price')">
+          {{ customer.price }}
+        </td>
+
+        <td [class.flash-changed]="isChanged(customer.id, 'quantity')">
+          {{ customer.quantity }}
+        </td>
+
+        <td [class.flash-changed]="isChanged(customer.id, 'status')">
+          {{ customer.status }}
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,12 @@
+.flash {
+  animation: flashChanged 3s ease-out;
+}
+
+@keyframes flashChanged {
+  0% {
+    background-color: #fff3a3;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
