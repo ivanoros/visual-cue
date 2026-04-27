@@ -28,13 +28,16 @@
         </td>
 
         <td
-          [class.changed-cell]="isChangedNew('quantityNew')"
-          [class.fade-out]="isFading('quantityNew')"
+          [class.changed-cell]="isChangedNew(customer.id, 'quantityNew')"
+          [class.fade-out]="isFadingNew(customer.id, 'quantityNew')"
           >
             {{ customer.quantityNew }}
         </td>
         
-        <td [class.changed-cell]="isChangedNew('priceNew')">
+        <td 
+          [class.changed-cell]="isChangedNew(customer.id, 'priceNew')"
+          [class.fade-out]="isFadingNew(customer.id, 'priceNew')"
+        >
           {{ customer.priceNew }}
         </td>
       </tr>

@@ -15,5 +15,23 @@
     <p [class.flash]="isChanged('status')">
       Status: {{ c.status }}
     </p>
+
+    <td [class.changed-cell]="isChanged('quantity')">
+      {{ c.quantity }}
+    </td>
+
+    <td
+      [class.value-up]="getDirection('price') === 'up'"
+      [class.value-down]="getDirection('price') === 'down'"
+      >
+        {{ c.price }}
+    </td>
+
+    <td
+      [class.changed-cell]="isChanged('price')"
+      [class.fade-out]="isFading('price')"
+      >
+        {{ c.price }}
+    </td>
   </div>
 }

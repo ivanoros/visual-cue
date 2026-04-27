@@ -10,3 +10,27 @@
     background-color: transparent;
   }
 }
+
+.changed-cell {
+  background-color: rgba(255, 230, 150, 0.45);
+  transition: background-color 1.5s ease-out;
+}
+
+.value-up {
+  color: #1b7f3a;
+  font-weight: 600;
+}
+
+.value-down {
+  color: #b42318;
+  font-weight: 600;
+}
+
+.changed-cell {
+  background-color: rgba(255, 230, 150, 0.45);
+}
+
+.fade-out {
+  background-color: transparent;
+  transition: background-color 1.5s ease-out;
+}

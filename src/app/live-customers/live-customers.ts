@@ -19,6 +19,10 @@ export class LiveCustomersComponent {
   customers = signal<Customer[]>([]);
   changedCells = signal<Set<string>>(new Set());
 
+  customersNew = signal<Customer[]>([]);
+  changedCellsNew = signal<Set<string>>(new Set());
+  fadingCellsNew = signal<Set<string>>(new Set());
+
   constructor(private customerService: CustomerService) {
     interval(15_000)
       .pipe(
@@ -28,6 +32,7 @@ export class LiveCustomersComponent {
       )
       .subscribe(newCustomers => {
         this.applyRefresh(newCustomers);
+        this.applyRefreshNew(newCustomers);
       });
   }
 
@@ -65,8 +70,54 @@ export class LiveCustomersComponent {
     }
   }
 
+  private applyRefreshNew(newCustomers: Customer[]): void {
+    const previousCustomers = this.customers();
+    const previousById = new Map(previousCustomers.map(c => [c.id, c]));
+
+    const changed = new Set<string>();
+
+    for (const current of newCustomers) {
+      const previous = previousById.get(current.id);
+
+      if (!previous) {
+        continue;
+      }
+
+      if (previous.priceNew !== current.priceNew) {
+        changed.add(this.cellKey(current.id, 'priceNew'));
+      }
+
+      if (previous.quantityNew !== current.quantityNew) {
+        changed.add(this.cellKey(current.id, 'quantityNew'));
+      }
+    }
+
+    this.customersNew.set(newCustomers);
+    this.changedCellsNew.set(changed);
+    this.fadingCellsNew.set(new Set());
+
+    if (changed.size > 0) {
+      setTimeout(() => {
+        this.fadingCellsNew.set(changed);
+
+        setTimeout(() => {
+          this.changedCellsNew.set(new Set());
+          this.fadingCellsNew.set(new Set());
+        }, 1500);
+      }, 300);
+    }
+  }
+
   isChanged(id: string, field: keyof Customer): boolean {
     return this.changedCells().has(this.cellKey(id, field));
+  }
+
+  isChangedNew(id: string, field: keyof Customer): boolean {
+    return this.changedCellsNew().has(this.cellKey(id, field));
+  }
+
+  isFadingNew(id: string, field: keyof Customer): boolean {
+    return this.fadingCellsNew().has(this.cellKey(id, field));
   }
 
   openCustomer(id: string) {
