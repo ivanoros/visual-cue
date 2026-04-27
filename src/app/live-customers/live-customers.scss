@@ -11,3 +11,12 @@
     background-color: transparent;
   }
 }
+
+.changed-cell {
+  background-color: rgba(255, 230, 150, 0.45);
+}
+
+.fade-out {
+  background-color: transparent;
+  transition: background-color 1.5s ease-out;
+}

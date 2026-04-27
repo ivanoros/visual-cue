@@ -9,9 +9,9 @@ import { Customer } from './customer';
 })
 export class CustomerService {
     private mockCustomers: Customer[] = [
-    { id: '1', name: 'Goldman Sachs', price: 101.25, quantity: 120, status: 'Active' },
-    { id: '2', name: 'Morgan Stanley', price: 99.80, quantity: 85, status: 'Active' },
-    { id: '3', name: 'JPMorgan', price: 105.10, quantity: 200, status: 'Inactive' }
+    { id: '1', name: 'Goldman Sachs', price: 101.25, quantity: 120, status: 'Active', priceNew: 111.25, quantityNew: 20 },
+    { id: '2', name: 'Morgan Stanley', price: 99.80, quantity: 85, status: 'Active', priceNew: 19.80, quantityNew: 75 },
+    { id: '3', name: 'JPMorgan', price: 105.10, quantity: 200, status: 'Inactive', priceNew: 115.10, quantityNew: 100 }
   ];
 
   private readonly http = inject(HttpClient);
@@ -33,7 +33,9 @@ export class CustomerService {
       ...c,
       //price: +(c.price + (Math.random() - 0.5)).toFixed(2),
       price: +(c.price + (Math.random() - 0.5) * 0.8).toFixed(2),
-      quantity: c.quantity + Math.floor((Math.random() - 0.5) * 20)
+      quantity: c.quantity + Math.floor((Math.random() - 0.5) * 20),
+      priceNew: +(c.priceNew + (Math.random() - 0.5) * 0.7).toFixed(2),
+      quantityNew: c.quantityNew + Math.floor((Math.random() - 0.4) * 15),
     }));
   }
 
@@ -48,7 +50,9 @@ export class CustomerService {
     const updated = {
       ...this.mockCustomers[0],
       price: +(this.mockCustomers[0].price + (Math.random() - 0.5) * 0.8).toFixed(2),
-      quantity: this.mockCustomers[0].quantity + Math.floor((random - 0.5) * 10)
+      quantity: this.mockCustomers[0].quantity + Math.floor((random - 0.5) * 10),
+      priceNew: +(this.mockCustomers[0].priceNew + (Math.random() - 0.5) * 0.7).toFixed(2),
+      quantityNew: this.mockCustomers[0].quantityNew + Math.floor((random - 0.4) * 15)
     };
 
     return of(updated).pipe(delay(300));

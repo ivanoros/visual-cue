@@ -5,6 +5,8 @@
       <th>Price</th>
       <th>Quantity</th>
       <th>Status</th>
+      <th>Quantity</th>
+      <th>Price</th>
     </tr>
   </thead>
 
@@ -23,6 +25,17 @@
 
         <td [class.flash-changed]="isChanged(customer.id, 'status')">
           {{ customer.status }}
+        </td>
+
+        <td
+          [class.changed-cell]="isChangedNew('quantityNew')"
+          [class.fade-out]="isFading('quantityNew')"
+          >
+            {{ customer.quantityNew }}
+        </td>
+        
+        <td [class.changed-cell]="isChangedNew('priceNew')">
+          {{ customer.priceNew }}
         </td>
       </tr>
     }

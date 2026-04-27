@@ -4,4 +4,6 @@ export interface Customer {
     price: number;
     quantity: number;
     status: string;
+    priceNew: number;
+    quantityNew: number;
 }
